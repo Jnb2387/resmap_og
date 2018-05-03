@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+#map {
+    position: fixed;
+    width:50%;
+}
+#features {
+    width: 50%;
+    margin-left: 50%;
+    font-family: Tw Cen MT;
+    overflow-y: scroll;
+    background-color: #fafafa;
+}
+section {
+    padding:  25px 50px;
+    line-height: 25px;
+    border-bottom: 1px solid #ddd;
+    opacity: 0.25;
+    font-size: 20px;
+}
+section.active {
+    opacity: 1;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 1000px;
+}
+</style>
+<div id='map'></div>
+<div id='features'>
+    <section id='welcome' class='active'>
+        <h3>Jeffrey Bradley</h3>
+        <p>Welcome to a my resumap! <br>I created this map in supplement to my resume and coverletter. I believe with all my experience and travel it can be a great way to showcase my skills and knownledge better.</p>
+    </section>
+    <section id='section1' class='active'>
+        <h3>Connecticut</h3>
+        <p>I grew up in Connecticut</p>
+    </section>
+    <section id='section2'>
+        <h3>Florida</h3>
+        <p>I joined the United States Navy right out of High School in 2005<br>
+        During my service I was stationed all along the East Coast mainly out of Florida. I also did two tours in the Middle East working along side Third County Nationals providing base support and operations.
+        </p>
+    </section>
+    <section id='section3'>
+        <h3>Hawaii</h3>
+        <p>In 2014 I moved to The Big Island on Hawaii. I worked for SolarCity, designing and installing residential solar panels. <br><br> <img src="images/Lily.jpg" width="300" height="300"><br><br></p>
+    </section>
+    <section id='section4'>
+        <h3>Colorado</h3>
+        <p> <br><br><iframe src="images/colorado.gif" width="370" height="240" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>
+        </p>
+    </section>
+    <!-- <section id='section5'>
+        <h3>Section 5</h3>
+        <p>Or videos! WHAT!<br><br><iframe width="560" height="315" src="https://www.youtube.com/embed/le0BLAEO93g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> </p>
+    </section>
+    <section id='section6'>
+        <h3>Section 6</h3>
+        <p>The most important thing is to tell <i>your</i> story. What makes you you?</p>
+    </section>
+    <section id='section7'>
+        <h3>Time to make your own</h3>
+        <p>Have fun!<br><br><iframe src="https://giphy.com/embed/lJNoBCvQYp7nq" width="300" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p></p>
+    </section> -->
+</div>
+<script src='script.js'></script>
+</body>
+</html>
