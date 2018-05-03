@@ -9,6 +9,7 @@ var map = new mapboxgl.Map({
         pitch: 0,
         hash: true,
 });
+map.addControl(new mapboxgl.NavigationControl());
 var chapters = {
     'welcome': {
         bearing: -0,
@@ -88,6 +89,54 @@ function setActiveChapter(chapterName) {
 function isElementOnScreen(id) {
     var element = document.getElementById(id);
     var bounds = element.getBoundingClientRect();
-    //console.log(bounds)
     return bounds.top < window.innerHeight && bounds.bottom > 100;
 }
+
+map.on('load',function(){
+    map.addSource('Work_locations', {
+        type: "vector",
+        url: 'mapbox://bradley2387.cjgr1k68j00sq58mlus8xzlkh-8u6xd'
+    });
+    map.addLayer({
+        'id': 'Work_locations',
+        'type': 'circle',
+        'source':'Work_locations',
+        'source-layer': 'Work_locations',
+        'paint': {
+            'circle-radius': {
+                'base': 1,
+                 'stops': [[10, 5], [22, 10]]
+            },
+            'circle-color': 'blue'
+        }
+    });
+    map.on('click', 'Work_locations', function (e) {
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.place_name;
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+    });
+    map.addLayer({
+        'id': 'Work_locations_labels',
+        'type': 'symbol',
+        'source': 'Work_locations',
+        "source-layer": "Work_locations",
+        "minzoom": 7,
+        'layout': {
+            'text-field': '{place_name}',
+            'text-size': 15,
+            "symbol-spacing": 500000,
+            "text-font": ["Open Sans Regular"],
+            "text-anchor": "center",
+			"text-justify": "center"
+
+        },
+        'paint': {
+            'text-color': 'white',
+            'text-halo-color': 'black',
+            'text-halo-width': 1.5
+        }
+    });
+})//end map load
