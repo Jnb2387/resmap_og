@@ -1,7 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYnJhZGxleTIzODciLCJhIjoiY2pnMTk0ZTk2NmJzOTJxbnZpMjl1ZGsxbiJ9.L-BSY_VjUrkHL3ov0OciKQ';
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/outdoors-v10',
+    style: 'mapbox://styles/bradley2387/cjgr7hc2v00032smw3weskvek',
         bearing: -0,
         center: [-105.066174, 39.272291],
         zoom: 2,
@@ -10,6 +10,7 @@ var map = new mapboxgl.Map({
         hash: true,
 });
 map.addControl(new mapboxgl.NavigationControl());
+var work_location_popup; 
 var chapters = {
     'welcome': {
         bearing: -0,
@@ -82,8 +83,9 @@ var activeChapterName = 'baker';
 function setActiveChapter(chapterName) {
     if (chapterName === activeChapterName) return;
     map.flyTo(chapters[chapterName]);
+    if(work_location_popup){work_location_popup.remove()};
     document.getElementById(chapterName).setAttribute('class', 'active');
-    document.getElementById(activeChapterName).setAttribute('class', '');
+    // document.getElementById(activeChapterName).setAttribute('class', '');
     activeChapterName = chapterName;
 }
 function isElementOnScreen(id) {
@@ -94,14 +96,13 @@ function isElementOnScreen(id) {
 
 map.on('load',function(){
     map.addSource('Work_locations', {
-        type: "vector",
-        url: 'mapbox://bradley2387.cjgr1k68j00sq58mlus8xzlkh-8u6xd'
+        type: "geojson",
+        data: 'http://localhost:8011/geojson/v1/work_locations?geom_column=geom&columns=*&limit=5000'
     });
     map.addLayer({
         'id': 'Work_locations',
         'type': 'circle',
         'source':'Work_locations',
-        'source-layer': 'Work_locations',
         'paint': {
             'circle-radius': {
                 'base': 1,
@@ -112,8 +113,8 @@ map.on('load',function(){
     });
     map.on('click', 'Work_locations', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = e.features[0].properties.place_name;
-        new mapboxgl.Popup()
+        var description = '<b>'+ e.features[0].properties.place_name +'</b><br>'+ e.features[0].properties.details;
+        work_location_popup = new mapboxgl.Popup()
             .setLngLat(coordinates)
             .setHTML(description)
             .addTo(map);
@@ -122,7 +123,6 @@ map.on('load',function(){
         'id': 'Work_locations_labels',
         'type': 'symbol',
         'source': 'Work_locations',
-        "source-layer": "Work_locations",
         "minzoom": 7,
         'layout': {
             'text-field': '{place_name}',
@@ -139,4 +139,17 @@ map.on('load',function(){
             'text-halo-width': 1.5
         }
     });
+    // const getworklocations = async function() {
+    //     try {
+    //       const response = await axios.get('http://localhost:8011/geojson/v1/work_locations?geom_column=geom&columns=*&limit=5000');
+    //       console.log(response);
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+    //   }
+    //   getworklocations()
+    
 })//end map load
+
+
+
