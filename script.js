@@ -97,7 +97,7 @@ function isElementOnScreen(id) {
 map.on('load',function(){
     map.addSource('Work_locations', {
         type: "geojson",
-        data: 'http://localhost:8011/geojson/v1/work_locations?geom_column=geom&columns=*&limit=5000'
+        data: 'https://resmap.herokuapp.com/geojson/v1/work_locations?geom_column=geom&columns=*&limit=5000'
     });
     map.addLayer({
         'id': 'Work_locations',
