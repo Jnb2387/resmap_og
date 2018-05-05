@@ -108,12 +108,13 @@ map.on('load',function(){
                 'base': 1,
                  'stops': [[10, 5], [22, 10]]
             },
-            'circle-color': 'blue'
+            'circle-opacity':0.5,
+            'circle-color': 'red'
         }
     });
     map.on('click', 'Work_locations', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = '<b>'+ e.features[0].properties.place_name +'</b><br>'+ e.features[0].properties.details;
+        var description = '<h3>'+ e.features[0].properties.place_name +'</h3><p>'+ e.features[0].properties.details+'</p>';
         work_location_popup = new mapboxgl.Popup()
             .setLngLat(coordinates)
             .setHTML(description)
@@ -128,7 +129,9 @@ map.on('load',function(){
             'text-field': '{place_name}',
             'text-size': 15,
             "symbol-spacing": 500000,
-            "text-font": ["Open Sans Regular"],
+            "text-font": ["Ubuntu Mono Bold",
+                         "Arial Unicode MS Regular"
+            ],
             "text-anchor": "center",
 			"text-justify": "center"
 
