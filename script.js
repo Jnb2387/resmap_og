@@ -22,13 +22,13 @@ var chapters = {
     'section1': {
         bearing: 0,
         center: [-72.847, 41.67],
-        zoom: 7.85,
+        zoom: 7.65,
         pitch: 0
     },
     'section2': {
         center: [-83.79, 28.761],
         //bearing: 54.40,
-        zoom: 6,
+        zoom: 5.8,
         speed: 0.6,
         //pitch: 44.50
     },
@@ -70,6 +70,7 @@ var chapters = {
 };
 // On every scroll event, check which element is on screen
 window.onscroll = function() {
+    console.log('scrolled')
     var chapterNames = Object.keys(chapters);
     for (var i = 0; i < chapterNames.length; i++) {
         var chapterName = chapterNames[i];
@@ -93,11 +94,22 @@ function isElementOnScreen(id) {
     var bounds = element.getBoundingClientRect();
     return bounds.top < window.innerHeight && bounds.bottom > 100;
 }
+var locationdata;
+const getworklocations = async function() {
+    try {
+     response = await axios.get("https://resmap.herokuapp.com/geojson/v1/work_locations?geom_column=geom&columns=*&limit=5000");
+     locationdata = response.data
+    } catch (error) {
+      console.error(error);
+       }
+    }
+getworklocations()
+
 
 map.on('load',function(){
-    map.addSource('Work_locations', {
-        type: "geojson",
-        data: 'https://resmap.herokuapp.com/geojson/v1/work_locations?geom_column=geom&columns=*&limit=5000'
+    map.addSource('Work_locations',{
+        'type': 'geojson',
+        'data': locationdata
     });
     map.addLayer({
         'id': 'Work_locations',
@@ -106,34 +118,26 @@ map.on('load',function(){
         'paint': {
             'circle-radius': {
                 'base': 1,
-                 'stops': [[10, 5], [22, 10]]
+                'stops': [[10, 5], [22, 10]]
             },
             'circle-opacity':0.5,
             'circle-color': 'red'
         }
     });
-    map.on('click', 'Work_locations', function (e) {
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = '<h3>'+ e.features[0].properties.place_name +'</h3><p>'+ e.features[0].properties.details+'</p>';
-        work_location_popup = new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-    });
     map.addLayer({
         'id': 'Work_locations_labels',
         'type': 'symbol',
         'source': 'Work_locations',
-        "minzoom": 7,
+        "minzoom": 5.79,
         'layout': {
             'text-field': '{place_name}',
-            'text-size': 15,
-            "symbol-spacing": 500000,
+            'text-size': 14,
+            "symbol-spacing": 50000,
             "text-font": ["Ubuntu Mono Bold",
-                         "Arial Unicode MS Regular"
+                        "Arial Unicode MS Regular"
             ],
             "text-anchor": "center",
-			"text-justify": "center"
+            "text-justify": "center"
 
         },
         'paint': {
@@ -142,17 +146,17 @@ map.on('load',function(){
             'text-halo-width': 1.5
         }
     });
-    // const getworklocations = async function() {
-    //     try {
-    //       const response = await axios.get('http://localhost:8011/geojson/v1/work_locations?geom_column=geom&columns=*&limit=5000');
-    //       console.log(response);
-    //     } catch (error) {
-    //       console.error(error);
-    //     }
-    //   }
-    //   getworklocations()
-    
-})//end map load
+     
+    map.on('click', 'Work_locations', function (e) {
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = '<h3>'+ e.features[0].properties.place_name +'</h3><p>'+ e.features[0].properties.details+'</p>';
+        work_location_popup = new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+    });
+   
+});//end map load
 
 
 
