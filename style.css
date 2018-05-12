@@ -1,4 +1,4 @@
-@media (max-width: 600px) {
+@media (max-width: 767px) {
     #map {
         position: absolute;
         width:100%;
@@ -12,12 +12,13 @@
         top:70%;
         margin-left:0;
     }
-    /* #section{
-        width:100%;
+    section{
+        /* position: absolute;         */
+        /* width:100%; */
         bottom:0;
         top:70%;
         margin-left:0;
-    } */
+    }
 }
  body { margin:0; padding:0; }
  
@@ -47,3 +48,47 @@ section:last-child {
     border-bottom: none;
     margin-bottom: 1000px;
 }
+
+
+
+  
+  .mapboxgl-popup-content {
+    font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+    padding: 5px;
+    width: 180px;
+  }
+  
+  .mapboxgl-popup-content-wrapper {
+    padding: 1%;
+  }
+  
+  .mapboxgl-popup-content h3 {
+    background: #aa7bdc;
+    color: #fff;
+    margin: 0;
+    display: block;
+    padding: 5px;
+    border-radius: 3px 3px 0 0;
+    font-weight: 700;
+    margin-top: -15px;
+    text-align: center;
+  }
+  
+  .mapboxgl-popup-content h4 {
+    margin: 0;
+    display: block;
+    padding: 10px;
+    font-weight: 400;
+  }
+  
+  .mapboxgl-popup-content div {
+    padding: 10px;
+  }
+  
+  .mapboxgl-container .leaflet-marker-icon {
+    cursor: pointer;
+  }
+  
+  .mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
+    margin-top: 15px;
+  }

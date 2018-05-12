@@ -21,8 +21,8 @@ var chapters = {
     },
     'section1': {
         bearing: 0,
-        center: [-72.847, 41.67],
-        zoom: 7.65,
+        center: [-72.87, 41.327],
+        zoom: 8,
         pitch: 0
     },
     'section2': {
@@ -41,10 +41,10 @@ var chapters = {
     },
     'section4': {
         bearing: 0,
-        center: [-105.545, 38.983],
-        zoom: 6,
-        speed: 0.6,
-        pitch: 54
+        center: [-104.964, 39.7548],
+        zoom: 8.5,
+        speed: 2,
+        pitch: 0
     },
     'section5': {
         bearing: 15.20,
@@ -68,8 +68,12 @@ var chapters = {
         pitch: 0
     },
 };
+
+
+$(".features").on('scroll', onScroll); // for mobile
+$(window).on('scroll', onScroll);
 // On every scroll event, check which element is on screen
-window.onscroll = function() {
+function onScroll() {
     var chapterNames = Object.keys(chapters);
     for (var i = 0; i < chapterNames.length; i++) {
         var chapterName = chapterNames[i];
@@ -79,20 +83,25 @@ window.onscroll = function() {
         }
     }
 };
-var activeChapterName = 'baker';
+var activeChapterName = 'welcome';
 function setActiveChapter(chapterName) {
     if (chapterName === activeChapterName) return;
     map.flyTo(chapters[chapterName]);
     if(work_location_popup){work_location_popup.remove()};
     document.getElementById(chapterName).setAttribute('class', 'active');
-    // document.getElementById(activeChapterName).setAttribute('class', '');
+    document.getElementById(activeChapterName).setAttribute('class', '');
     activeChapterName = chapterName;
 }
 function isElementOnScreen(id) {
     var element = document.getElementById(id);
     var bounds = element.getBoundingClientRect();
-    return bounds.top < window.innerHeight && bounds.bottom > 100;
-}
+    console.log(window.innerWidth)
+    if(window.innerWidth < 800 ){return bounds.top < window.innerHeight && bounds.bottom > 600}
+     return bounds.top < window.innerHeight && bounds.bottom > 150;
+    }
+
+
+
 var locationdata;
 const getworklocations = async function() {
     try {
@@ -146,7 +155,7 @@ map.on('load',function(){
         }
     });
      
-    map.on('click', 'Work_locations', function (e) {
+    map.on('click', 'Work_locations_labels', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
         var description = '<h3>'+ e.features[0].properties.place_name +'</h3><p>'+ e.features[0].properties.details+'</p>';
         work_location_popup = new mapboxgl.Popup()
