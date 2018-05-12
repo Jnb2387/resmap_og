@@ -1,23 +1,23 @@
 @media (max-width: 600px) {
     #map {
-        /* position: absolute; */
+        position: absolute;
         width:100%;
         left:0;
         bottom:30%
     }
     #features{
-        /* position: absolute;         */
+        position: absolute;        
         width:100%;
         bottom:0;
         top:70%;
         margin-left:0;
     }
-    #section{
+    /* #section{
         width:100%;
         bottom:0;
         top:70%;
         margin-left:0;
-    }
+    } */
 }
  body { margin:0; padding:0; }
  

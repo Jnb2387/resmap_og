@@ -70,7 +70,6 @@ var chapters = {
 };
 // On every scroll event, check which element is on screen
 window.onscroll = function() {
-    console.log('scrolled')
     var chapterNames = Object.keys(chapters);
     for (var i = 0; i < chapterNames.length; i++) {
         var chapterName = chapterNames[i];
