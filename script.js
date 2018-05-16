@@ -95,7 +95,7 @@ function setActiveChapter(chapterName) {
 function isElementOnScreen(id) {
     var element = document.getElementById(id);
     var bounds = element.getBoundingClientRect();
-    console.log(window.innerWidth)
+    console.log(window.innerWidth);
     if(window.innerWidth < 800 ){return bounds.top < window.innerHeight && bounds.bottom > 600}
      return bounds.top < window.innerHeight && bounds.bottom > 150;
     }
@@ -106,32 +106,28 @@ var locationdata;
 const getworklocations = async function() {
     try {
      response = await axios.get("https://resmap.herokuapp.com/geojson/v1/work_locations?geom_column=geom&columns=*&limit=5000");
-     locationdata = response.data
-    } catch (error) {
-      console.error(error);
-       }
-    }
-getworklocations()
-
-
-map.on('load',function(){
-    map.addSource('Work_locations',{
+     locationdata = response.data;
+     console.log('locationdata filled');
+     map.addSource('Work_locations',{
         'type': 'geojson',
         'data': locationdata
     });
-    map.addLayer({
-        'id': 'Work_locations',
-        'type': 'circle',
-        'source':'Work_locations',
-        'paint': {
-            'circle-radius': {
-                'base': 1,
-                'stops': [[10, 5], [22, 10]]
-            },
-            'circle-opacity':0.5,
-            'circle-color': 'red'
-        }
-    });
+
+        map.addLayer({
+            'id': 'Work_locations',
+            'type': 'circle',
+            'source':'Work_locations',
+            'paint': {
+                'circle-radius': {
+                    'base': 1,
+                    'stops': [[10, 5], [22, 10]]
+                },
+                'circle-opacity':0.5,
+                'circle-color': 'red'
+            }
+        });
+    
+    
     map.addLayer({
         'id': 'Work_locations_labels',
         'type': 'symbol',
@@ -155,6 +151,38 @@ map.on('load',function(){
         }
     });
      
+    } catch (error) {
+      console.error(error);
+       }
+    };
+
+    getworklocations();
+
+
+map.on('load',function(){
+    map.addSource('population', {
+        'type':'vector',
+        'url':'mapbox://peterqliu.d0vin3el'
+      })
+      map.addLayer({
+        'id':'fills',
+        'type':'fill',
+        'filter':['all', ['<', 'pkm2', 300000]],
+        'source':'population',
+        'source-layer':'outgeojson',
+        'paint':{
+          'fill-color':'red',
+          'fill-opacity':1,
+          'fill-outline-color':'white'
+        },
+        'paint.tilted':{
+        }
+      })
+  
+      map.on('click', function (e) {
+        var features = map.queryRenderedFeatures(e.point);
+        console.log(features[0].properties)
+    }); 
     map.on('click', 'Work_locations_labels', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
         var description = '<h3>'+ e.features[0].properties.place_name +'</h3><p>'+ e.features[0].properties.details+'</p>';
@@ -162,9 +190,5 @@ map.on('load',function(){
             .setLngLat(coordinates)
             .setHTML(description)
             .addTo(map);
-    });
-   
+    }); 
 });//end map load
-
-
-
