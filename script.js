@@ -2,15 +2,15 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYnJhZGxleTIzODciLCJhIjoiY2pnMTk0ZTk2NmJzOTJxb
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/bradley2387/cjgr7hc2v00032smw3weskvek',
-        bearing: -0,
-        center: [-105.066174, 39.272291],
-        zoom: 2,
-        speed: 0.8,
-        pitch: 0,
-        hash: true,
+    bearing: -0,
+    center: [-105.066174, 39.272291],
+    zoom: 2,
+    speed: 0.8,
+    pitch: 0,
+    hash: true,
 });
 map.addControl(new mapboxgl.NavigationControl());
-var work_location_popup; 
+var work_location_popup;
 var chapters = {
     'welcome': {
         bearing: -0,
@@ -27,10 +27,10 @@ var chapters = {
     },
     'section2': {
         center: [-83.79, 28.761],
-        //bearing: 54.40,
+        bearing: 0,
         zoom: 5.8,
         speed: 0.6,
-        //pitch: 44.50
+        pitch: 0
     },
     'section3': {
         bearing: -17.6,
@@ -74,60 +74,61 @@ $(".features").on('scroll', onScroll); // for mobile
 $(window).on('scroll', onScroll);
 // On every scroll event, check which element is on screen
 function onScroll() {
-    var chapterNames = Object.keys(chapters);
+    var chapterNames = Object.keys(chapters); // grab all the object keys like welcome or section1
     for (var i = 0; i < chapterNames.length; i++) {
-        var chapterName = chapterNames[i];
-        if (isElementOnScreen(chapterName)) {
-            setActiveChapter(chapterName);
+        var chapterName = chapterNames[i]; //set chapterName to the current value of the chapterNames array
+        if (isElementOnScreen(chapterName)) { //if the current chapter hits the certain threshold of space from the top of the window height
+            setActiveChapter(chapterName); // run the function to set the current chapter like fly to and highlight or unhighlight.
             break;
         }
     }
 };
-var activeChapterName = 'welcome';
+var activeChapterName = 'welcome'; //start with the welcome section as active.
 function setActiveChapter(chapterName) {
-    if (chapterName === activeChapterName) return;
+    if (chapterName === activeChapterName) return; //dont do anything
     map.flyTo(chapters[chapterName]);
-    if(work_location_popup){work_location_popup.remove()};
-    document.getElementById(chapterName).setAttribute('class', 'active');
-    document.getElementById(activeChapterName).setAttribute('class', '');
+    if (work_location_popup) {
+        work_location_popup.remove();
+    } //remove any popups that might still be on the screen
+    document.getElementById(chapterName).setAttribute('class', 'active'); //set the section area to be active
+    document.getElementById(activeChapterName).setAttribute('class', ''); //set the section area to inactive
     activeChapterName = chapterName;
 }
+
 function isElementOnScreen(id) {
-    var element = document.getElementById(id);
+    var element = document.getElementById(id); // the current chapterName or section
     var bounds = element.getBoundingClientRect();
-    console.log(window.innerWidth);
-    if(window.innerWidth < 800 ){return bounds.top < window.innerHeight && bounds.bottom > 600}
-     return bounds.top < window.innerHeight && bounds.bottom > 150;
-    }
+    if (window.innerWidth < 800) {
+        return bounds.top < window.innerHeight && bounds.bottom > 600;
+    } //for smaller screen does not need to scroll to the top
+    return bounds.top < window.innerHeight && bounds.bottom > 150;
+}
 
 
-
-var locationdata;
-const getworklocations = async function() {
-    try {
-     response = await axios.get("https://resmap.herokuapp.com/geojson/v1/work_locations?geom_column=geom&columns=*&limit=5000");
-     locationdata = response.data;
-     console.log('locationdata filled');
-     map.addSource('Work_locations',{
+map.on('load', function () {
+ 
+    map.addSource('Work_locations',{
         'type': 'geojson',
-        'data': locationdata
+        'data': "./worklocations.json"
     });
 
-        map.addLayer({
-            'id': 'Work_locations',
-            'type': 'circle',
-            'source':'Work_locations',
-            'paint': {
-                'circle-radius': {
-                    'base': 1,
-                    'stops': [[10, 5], [22, 10]]
-                },
-                'circle-opacity':0.5,
-                'circle-color': 'red'
-            }
-        });
-    
-    
+    map.addLayer({
+        'id': 'Work_locations',
+        'type': 'circle',
+        'source': 'Work_locations',
+        'paint': {
+            'circle-radius': {
+                'base': 1,
+                'stops': [
+                    [10, 5],
+                    [22, 10]
+                ]
+            },
+            'circle-opacity': 0.5,
+            'circle-color': 'red'
+        }
+    });
+
     map.addLayer({
         'id': 'Work_locations_labels',
         'type': 'symbol',
@@ -138,7 +139,7 @@ const getworklocations = async function() {
             'text-size': 14,
             "symbol-spacing": 50000,
             "text-font": ["Ubuntu Mono Bold",
-                        "Arial Unicode MS Regular"
+                "Arial Unicode MS Regular"
             ],
             "text-anchor": "center",
             "text-justify": "center"
@@ -150,45 +151,71 @@ const getworklocations = async function() {
             'text-halo-width': 1.5
         }
     });
-     
-    } catch (error) {
-      console.error(error);
-       }
-    };
 
-    getworklocations();
-
-
-map.on('load',function(){
-    map.addSource('population', {
-        'type':'vector',
-        'url':'mapbox://peterqliu.d0vin3el'
-      })
-      map.addLayer({
-        'id':'fills',
-        'type':'fill',
-        'filter':['all', ['<', 'pkm2', 300000]],
-        'source':'population',
-        'source-layer':'outgeojson',
-        'paint':{
-          'fill-color':'red',
-          'fill-opacity':1,
-          'fill-outline-color':'white'
-        },
-        'paint.tilted':{
-        }
-      })
-  
-      map.on('click', function (e) {
+    map.on('click', function (e) {
         var features = map.queryRenderedFeatures(e.point);
-        console.log(features[0].properties)
-    }); 
+        console.log(features[0].properties);
+    });
+
     map.on('click', 'Work_locations_labels', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = '<h3>'+ e.features[0].properties.place_name +'</h3><p>'+ e.features[0].properties.details+'</p>';
+        var description = '<h3>' + e.features[0].properties.place_name + '</h3><p>' + e.features[0].properties.details + '</p>';
         work_location_popup = new mapboxgl.Popup()
             .setLngLat(coordinates)
             .setHTML(description)
             .addTo(map);
-    }); 
-});//end map load
+    });
+
+}); //end map load
+
+//"https://resmap.herokuapp.com/geojson/v1/work_locations?geom_column=geom&columns=*&limit=5000"
+
+
+
+// function addstates(table){
+//     map.addSource('states',{
+//         'type': 'geojson',
+//         'data': table
+//     });
+
+//     map.addLayer({
+//         'id': 'states',
+//         'type': 'fill',
+//         // 'filter':['all', ['<', 'pkm2', 300000]],
+//         'source':'states',
+//         'paint': {
+//             'fill-color':  [
+//                 'match',
+//                 ['get', 'beento'],
+//                 '1', '#fbb03b',
+//                 '0', '#223b53',
+//                 /* other */ '#ccc'
+//             ],
+//             'fill-opacity':0.5,
+//             'fill-outline-color': 'white'
+//         }
+//     });
+
+
+//     map.addLayer({
+//         'id': 'states_labels',
+//         'type': 'symbol',
+//         'source': 'states',
+//         // "minzoom": 5.79,
+//         'layout': {
+//             'text-field': '{name}',
+//             'text-size': 14,
+//             "symbol-spacing": 50000,
+//             "text-font": ["Ubuntu Mono Bold",
+//                         "Arial Unicode MS Regular"
+//             ],
+//             "text-anchor": "center",
+//             "text-justify": "center"
+
+//         },
+//         'paint': {
+//             'text-color': 'white',
+//             'text-halo-color': 'black',
+//             'text-halo-width': 1.5
+//         }
+//     });

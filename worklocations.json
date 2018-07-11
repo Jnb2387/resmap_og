@@ -1,0 +1,114 @@
+{
+    "type": "FeatureCollection",
+    "features": [{
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-156.021276, 19.68826]
+        },
+        "properties": {
+            "place_name": "SolarCity",
+            "details": "Designed layouts and installed residental Solar Panels",
+            "id": 8
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-72.660993, 41.279904]
+        },
+        "properties": {
+            "place_name": "IVFonline (GenX International)",
+            "details": "Designed and built laboratory sterilization equipment",
+            "id": 1
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-72.9616, 41.2907]
+        },
+        "properties": {
+            "place_name": "University of New Haven",
+            "details": "Bachelors of Science",
+            "id": 9
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-87.288366, 30.355397]
+        },
+        "properties": {
+            "place_name": "US Navy",
+            "details": "Worked for Base Security",
+            "id": 6
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-104.865246, 39.567236]
+        },
+        "properties": {
+            "place_name": "Frontier Geotek",
+            "details": "GIS Specialist / Database Administrator Technology used: PostgreSQL/PostGIS, FME, Alteryx, QGIS, ArcGIS Suite, Oracle, GeoServer, NodeJS,",
+            "id": 3
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-105.22014, 40.017005]
+        },
+        "properties": {
+            "place_name": "ReFactorU",
+            "details": "Web Development Bootcamp, studied JavaScript, HTML, CSS, NodeJS, AngularJS, MongDB",
+            "id": 2
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-104.889672, 39.600985]
+        },
+        "properties": {
+            "place_name": "CBI Engineering",
+            "details": "GIS/Field Technician. Technology used: EOS High-Accuracy Arrow GPS, ArcMap, ArcGIS Collector & Workforce, ArcSDE ",
+            "id": 4
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-80.659707, 28.320007]
+        },
+        "properties": {
+            "place_name": "Langley Fire and Marine",
+            "details": "Government Contracted for Wildland Fire and Rescue",
+            "id": 5
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-105.038071, 39.899681]
+        },
+        "properties": {
+            "place_name": "Front Range CC",
+            "details": "Studied GIS/Remote Sensing",
+            "id": 10
+        }
+    }, {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [44.3615, 33.3128]
+        },
+        "properties": {
+            "place_name": "US Navy",
+            "details": "Worked with Third Country Nationals on Base Command Group",
+            "id": 7
+        }
+    }]
+}
