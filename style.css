@@ -15,9 +15,12 @@
     section{
         /* position: absolute;         */
         /* width:100%; */
+        background-image: none !important;
+        color:black !important;
         bottom:0;
         top:70%;
         margin-left:0;
+        text-shadow: 0px 0px 0px black !important;
     }
 }
  body { margin:0; padding:0; }
@@ -80,7 +83,7 @@ section.active {
 }
 section:last-child {
     border-bottom: none;
-    margin-bottom: 550px;
+    margin-bottom: 700px;
 }
 
 
