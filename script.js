@@ -47,26 +47,26 @@ var chapters = {
         pitch: 0
     },
     'section5': {
-        bearing: 15.20,
-        center: [29.027289, 41.013899],
-        zoom: 10.56,
-        pitch: 40.50,
-        speed: 0.6
-    },
-    'section6': {
         bearing: 0,
-        center: [-63.594167, -17.701427],
-        zoom: 5.53,
+        center: [-95.62,36.73],
+        zoom: 3.33,
         pitch: 0,
         speed: 0.6
     },
-    'section7': {
-        bearing: -0,
-        center: [27.230526, 0.000000],
-        zoom: 1.18,
-        speed: 0.8,
-        pitch: 0
-    },
+    // 'section6': {
+    //     bearing: 0,
+    //     center: [-63.594167, -17.701427],
+    //     zoom: 5.53,
+    //     pitch: 0,
+    //     speed: 0.6
+    // },
+    // 'section7': {
+    //     bearing: -0,
+    //     center: [27.230526, 0.000000],
+    //     zoom: 1.18,
+    //     speed: 0.8,
+    //     pitch: 0
+    // },
 };
 
 
@@ -154,7 +154,7 @@ map.on('load', function () {
 
     map.on('click', function (e) {
         var features = map.queryRenderedFeatures(e.point);
-        console.log(features[0].properties);
+        console.log(features);
     });
 
     map.on('click', 'Work_locations_labels', function (e) {
@@ -167,55 +167,3 @@ map.on('load', function () {
     });
 
 }); //end map load
-
-//"https://resmap.herokuapp.com/geojson/v1/work_locations?geom_column=geom&columns=*&limit=5000"
-
-
-
-// function addstates(table){
-//     map.addSource('states',{
-//         'type': 'geojson',
-//         'data': table
-//     });
-
-//     map.addLayer({
-//         'id': 'states',
-//         'type': 'fill',
-//         // 'filter':['all', ['<', 'pkm2', 300000]],
-//         'source':'states',
-//         'paint': {
-//             'fill-color':  [
-//                 'match',
-//                 ['get', 'beento'],
-//                 '1', '#fbb03b',
-//                 '0', '#223b53',
-//                 /* other */ '#ccc'
-//             ],
-//             'fill-opacity':0.5,
-//             'fill-outline-color': 'white'
-//         }
-//     });
-
-
-//     map.addLayer({
-//         'id': 'states_labels',
-//         'type': 'symbol',
-//         'source': 'states',
-//         // "minzoom": 5.79,
-//         'layout': {
-//             'text-field': '{name}',
-//             'text-size': 14,
-//             "symbol-spacing": 50000,
-//             "text-font": ["Ubuntu Mono Bold",
-//                         "Arial Unicode MS Regular"
-//             ],
-//             "text-anchor": "center",
-//             "text-justify": "center"
-
-//         },
-//         'paint': {
-//             'text-color': 'white',
-//             'text-halo-color': 'black',
-//             'text-halo-width': 1.5
-//         }
-//     });

@@ -33,6 +33,20 @@
 p {
   text-indent: 30px;
 }
+#section1{
+  background: url("images/ct.jpg");
+  background-repeat: no-repeat;
+  background-size: 950px 300px;
+  color:lightyellow;
+  text-shadow: 1px 1px 4px black;
+}
+#section2{
+  background: url("images/usn.jpg");
+  background-repeat: no-repeat;
+  background-size: 950px 300px;
+  color:lightyellow;
+  text-shadow: 1px 1px 4px black;
+}
 #section3{
   background: url("images/hawaii.jpg");
   background-repeat: no-repeat;
