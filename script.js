@@ -35,8 +35,8 @@ var chapters = {
     'section3': {
         bearing: -17.6,
         center: [-155.521, 19.531],
-        zoom: 8,
-        speed: 0.6,
+        zoom: 9,
+        speed: 0.7,
         pitch: 50
     },
     'section4': {
@@ -159,11 +159,33 @@ map.on('load', function () {
 
     map.on('click', 'Work_locations_labels', function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
-        var description = '<h3>' + e.features[0].properties.place_name + '</h3><p>' + e.features[0].properties.details + '</p>';
+        var description = '<h3>' + e.features[0].properties.place_name + '</h3>' + e.features[0].properties.details;
         work_location_popup = new mapboxgl.Popup()
             .setLngLat(coordinates)
             .setHTML(description)
             .addTo(map);
     });
+      // Create a popup, but don't add it to the map yet.
+      var popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+    });
+    
+    map.on('mouseover', 'co-mile-contour', function(e){
+        var coordinates = e.lngLat;
+        var description="<h4 id=onemilehigh> One Mile High</h4>"
+        popup.setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+        map.getCanvas().style.cursor = 'pointer';
+        map.setPaintProperty('co-mile-contour','line-color','blue');
+    });
+    map.on('mouseleave', 'co-mile-contour', function(e){
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+        map.setPaintProperty('co-mile-contour','line-color','#9bc149');
+    });
+
+
 
 }); //end map load

@@ -86,13 +86,18 @@ section:last-child {
     margin-bottom: 700px;
 }
 
+#onemilehigh{
+
+  font-size: 12px;
+  font-family: 'Knewave Regular', Sans-serif;
+}
 
 
   
   .mapboxgl-popup-content {
-    font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+    font: 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
     padding: 5px;
-    width: 180px;
+    /* width: 50%; */
   }
   
   .mapboxgl-popup-content-wrapper {

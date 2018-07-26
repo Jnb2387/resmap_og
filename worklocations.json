@@ -52,7 +52,7 @@
         },
         "properties": {
             "place_name": "Frontier Geotek",
-            "details": "GIS Specialist / Database Administrator Technology used: PostgreSQL/PostGIS, FME, Alteryx, QGIS, ArcGIS Suite, Oracle, GeoServer, NodeJS,",
+            "details": "<i>GIS Specialist / Database Administrator </i></br> Technology used: PostgreSQL/PostGIS, FME,</br> Alteryx, QGIS, ArcGIS Suite, Oracle, GeoServer, NodeJS,",
             "id": 3
         }
     }, {
@@ -63,7 +63,7 @@
         },
         "properties": {
             "place_name": "ReFactorU",
-            "details": "Web Development Bootcamp, studied JavaScript, HTML, CSS, NodeJS, AngularJS, MongDB",
+            "details": "Web Development Bootcamp, studied JavaScript, </br> HTML, CSS, NodeJS, AngularJS, MongDB",
             "id": 2
         }
     }, {
@@ -74,7 +74,7 @@
         },
         "properties": {
             "place_name": "CBI Engineering",
-            "details": "GIS/Field Technician. Technology used: EOS High-Accuracy Arrow GPS, ArcMap, ArcGIS Collector & Workforce, ArcSDE ",
+            "details": "<i>GIS/Field Technician.</i></br>  Technology used: EOS High-Accuracy Arrow GPS,</br> ArcMap, ArcGIS Collector & Workforce, ArcSDE ",
             "id": 4
         }
     }, {
@@ -107,7 +107,7 @@
         },
         "properties": {
             "place_name": "US Navy",
-            "details": "Worked with Third Country Nationals on Base Command Group",
+            "details": "Worked with Third Country Nationals </br>on Base Command Group",
             "id": 7
         }
     }]
