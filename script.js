@@ -53,20 +53,6 @@ var chapters = {
         pitch: 0,
         speed: 0.6
     },
-    // 'section6': {
-    //     bearing: 0,
-    //     center: [-63.594167, -17.701427],
-    //     zoom: 5.53,
-    //     pitch: 0,
-    //     speed: 0.6
-    // },
-    // 'section7': {
-    //     bearing: -0,
-    //     center: [27.230526, 0.000000],
-    //     zoom: 1.18,
-    //     speed: 0.8,
-    //     pitch: 0
-    // },
 };
 
 
@@ -100,7 +86,6 @@ function setLegend(chapterName)
     var hawaiilegend = $('#hawaiilegend');
     var coloradolegend=$('#coloradolegend');
     var alllegend=$('#alllegend');
-    console.log(chapterName);
     switch(chapterName) {
         case 'section3':
             hawaiilegend.slideDown('slow');

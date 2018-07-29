@@ -197,10 +197,9 @@ section:last-child {
 
 @media screen and (max-width: 767px) {
   #map {
-    position: fixed;
     width: 100%;
     left: 0;
-    bottom: 30%
+    bottom: 30%;
   }
   #features {
     position: absolute;
@@ -208,13 +207,6 @@ section:last-child {
     bottom: 0;
     top: 70%;
     margin-left: 0;
-  }
-  section {
-    color: black;
-    bottom: 0;
-    top: 70%;
-    margin-left: 0;
-    text-shadow: 0px 0px 0px black;
   }
   .legend {
     bottom: 35%;
