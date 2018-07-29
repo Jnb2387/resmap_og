@@ -197,7 +197,7 @@ section:last-child {
 
 @media screen and (max-width: 767px) {
   #map {
-    position: absolute;
+    position: fixed;
     width: 100%;
     left: 0;
     bottom: 30%
