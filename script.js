@@ -35,7 +35,7 @@ var chapters = {
     'section3': {
         bearing: -17.6,
         center: [-155.521, 19.531],
-        zoom: 9,
+        zoom: 9.3,
         speed: 0.7,
         pitch: 50
     },
@@ -78,7 +78,8 @@ function onScroll() {
     for (var i = 0; i < chapterNames.length; i++) {
         var chapterName = chapterNames[i]; //set chapterName to the current value of the chapterNames array
         if (isElementOnScreen(chapterName)) { //if the current chapter hits the certain threshold of space from the top of the window height
-            setActiveChapter(chapterName); // run the function to set the current chapter like fly to and highlight or unhighlight.
+            setActiveChapter(chapterName); // run the function to set the current chapter like fly to and highlight or unhighlight
+            setLegend(chapterName);
             break;
         }
     }
@@ -93,6 +94,29 @@ function setActiveChapter(chapterName) {
     document.getElementById(chapterName).setAttribute('class', 'active'); //set the section area to be active
     document.getElementById(activeChapterName).setAttribute('class', ''); //set the section area to inactive
     activeChapterName = chapterName;
+}
+function setLegend(chapterName) 
+{
+    var hawaiilegend = $('#hawaiilegend');
+    var coloradolegend=$('#coloradolegend');
+    var alllegend=$('#alllegend');
+    console.log(chapterName);
+    switch(chapterName) {
+        case 'section3':
+            hawaiilegend.slideDown('slow');
+            coloradolegend.slideUp('slow');
+            alllegend.slideUp('slow');
+            break;
+        case 'section4':
+            hawaiilegend.slideUp('slow');
+            coloradolegend.slideDown('slow');
+            alllegend.slideUp('slow');
+            break;
+        default:
+            hawaiilegend.slideUp('slow');
+            coloradolegend.slideUp('slow');
+            alllegend.slideDown('slow');
+    }
 }
 
 function isElementOnScreen(id) {
@@ -124,7 +148,7 @@ map.on('load', function () {
                     [22, 10]
                 ]
             },
-            'circle-opacity': 0.5,
+            'circle-opacity': 0.8,
             'circle-color': 'red'
         }
     });
@@ -141,7 +165,7 @@ map.on('load', function () {
             "text-font": ["Ubuntu Mono Bold",
                 "Arial Unicode MS Regular"
             ],
-            "text-anchor": "center",
+            "text-anchor": "top",
             "text-justify": "center"
 
         },
@@ -171,21 +195,21 @@ map.on('load', function () {
         closeOnClick: false
     });
     
-    map.on('mouseover', 'co-mile-contour', function(e){
-        var coordinates = e.lngLat;
-        var description="<h4 id=onemilehigh> One Mile High</h4>"
-        popup.setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-        map.getCanvas().style.cursor = 'pointer';
-        map.setPaintProperty('co-mile-contour','line-color','blue');
-    });
-    map.on('mouseleave', 'co-mile-contour', function(e){
-        map.getCanvas().style.cursor = '';
-        popup.remove();
-        map.setPaintProperty('co-mile-contour','line-color','#9bc149');
-    });
-
-
-
+   
 }); //end map load
+
+
+ // map.on('mouseover', 'co-mile-contour', function(e){
+    //     var coordinates = e.lngLat;
+    //     var description="<h4 id=onemilehigh> One Mile High</h4>"
+    //     popup.setLngLat(coordinates)
+    //         .setHTML(description)
+    //         .addTo(map);
+    //     map.getCanvas().style.cursor = 'pointer';
+    //     map.setPaintProperty('co-mile-contour','line-color','blue');
+    // });
+    // map.on('mouseleave', 'co-mile-contour', function(e){
+    //     map.getCanvas().style.cursor = '';
+    //     popup.remove();
+    //     map.setPaintProperty('co-mile-contour','line-color','#9bc149');
+    // });

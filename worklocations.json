@@ -52,7 +52,7 @@
         },
         "properties": {
             "place_name": "Frontier Geotek",
-            "details": "<i>GIS Specialist / Database Administrator </i></br> Technology used: PostgreSQL/PostGIS, FME,</br> Alteryx, QGIS, ArcGIS Suite, Oracle, GeoServer, NodeJS,",
+            "details": "<i>GIS Specialist / Database Administrator </i></br> Technology used: PostgreSQL/PostGIS, FME,</br> Alteryx, QGIS, ArcGIS Suite, Oracle, GeoServer, NodeJS</br>GDAL/OGR, PHP, JavaScript, Leaflet",
             "id": 3
         }
     }, {

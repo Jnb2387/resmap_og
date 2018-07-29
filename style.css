@@ -1,172 +1,223 @@
-@media (max-width: 767px) {
-    #map {
-        position: absolute;
-        width:100%;
-        left:0;
-        bottom:30%
-    }
-    #features{
-        position: absolute;        
-        width:100%;
-        bottom:0;
-        top:70%;
-        margin-left:0;
-    }
-    section{
-        /* position: absolute;         */
-        /* width:100%; */
-        background-image: none !important;
-        color:black !important;
-        bottom:0;
-        top:70%;
-        margin-left:0;
-        text-shadow: 0px 0px 0px black !important;
-    }
+@font-face {
+  font-family:'hawaii';
+  src: url('font/Hawaiian-Kids.ttf')
 }
- body { margin:0; padding:0; }
+@font-face {
+  font-family: 'colorado';
+  src: url('font/blackfont.ttf')
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.map {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+}
+.legenddescription{
+  position: relative;
+  bottom: 8px;
+}
+#hawaiilegend h1{
+  font: 16px/1px hawaii;
+  /* text-align: center; */
+}
+#coloradolegend h1{
+  font:16px/1px colorado;
+  /* text-align: center; */
+}
+
+.legend {
+  background-color: #fff;
+  border-radius: 3px;
+  bottom: 30px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
+  font: 10px/1px roboto, sans-serif;
+  padding: 12px 5px 9px 5px;
+  position: fixed;
+  left: 10px;
+  z-index: 10;
+  display: fixed;
+}
+
+.legend h1 {
+  margin:1px 10px 10px;
+  text-align: center;
+}
+
+.legend div {
+  display: block;
  
- .map {
-    position: fixed;
-    top:0; bottom:0;
-    width:50%;
+}
+
+#volcano{ 
+  height: 22px;
+  margin-right: 5px;
+  width: 22px;
+  display: inline-block;
+  background: url("images/volcano-15.svg");
+  background-repeat: no-repeat;}
+#contour{
+  height: 24px;
+  margin-right: 5px;
+  width: 22px;
+  display: inline-block;
+  background: url("images/contour.svg");
+  background-repeat: no-repeat;
+}
+
+
+.worklocations{
+  border-radius: 50%;
+  display: inline-block;
+  height: 18px;
+  margin: 5px 7px 6px 3px;
+  width: 18px;
+  background-color:red;
 }
 #myname {
-  text-align:center;
+  text-align: center;
 }
-p {
+
+.features p {
   text-indent: 30px;
 }
-/* #section1{
-  background: url("images/ct.jpg");
-  background-repeat: no-repeat;
-  background-size: 950px 300px;
-  color:lightyellow;
-  text-shadow: 1px 1px 4px black;
-}
-#section2{
-  background: url("images/usn.jpg");
-  background-repeat: no-repeat;
-  background-size: 950px 300px;
-  color:lightyellow;
-  text-shadow: 1px 1px 4px black;
-}
-#section3{
-  background: url("images/hawaii.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  color:white;
-}
-#section4{
-  background: url("images/colorado.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: white;
-  text-shadow: 1px 1px 4px black;
-} */
 
 .features {
-    width: 50%;
-    margin-left: 50%;
-    font-family: Tw Cen MT;
-    overflow-y: scroll;
-    background-color: #fafafa;
+  width: 50%;
+  margin-left: 50%;
+  font-family: Tw Cen MT;
+  overflow-y: scroll;
+  background-color: #fafafa;
 }
+
 section {
-    padding:  25px 50px;
-    line-height: 25px;
-    border-bottom: 1px solid #ddd;
-    opacity: 0.25;
-    font-size: 20px;
+  padding: 25px 50px;
+  line-height: 25px;
+  border-bottom: 1px solid #ddd;
+  opacity: 0.25;
+  font-size: 20px;
 }
+
 section.active {
-    opacity: 1;
+  opacity: 1;
 }
+
 section:last-child {
-    border-bottom: none;
-    margin-bottom: 700px;
+  border-bottom: none;
+  margin-bottom: 700px;
 }
 
-#onemilehigh{
-
+#onemilehigh {
   font-size: 12px;
   font-family: 'Knewave Regular', Sans-serif;
 }
 
+.mapboxgl-popup-content {
+  font: 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  padding: 5px;
+  /* width: 50%; */
+}
 
-  
-  .mapboxgl-popup-content {
-    font: 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
-    padding: 5px;
-    /* width: 50%; */
-  }
-  
-  .mapboxgl-popup-content-wrapper {
-    padding: 1%;
-  }
-  
-  .mapboxgl-popup-content h3 {
-    background: #aa7bdc;
-    color: #fff;
-    margin: 0;
-    display: block;
-    padding: 5px;
-    border-radius: 3px 3px 0 0;
-    font-weight: 700;
-    margin-top: -15px;
-    text-align: center;
-  }
-  
-  .mapboxgl-popup-content h4 {
-    margin: 0;
-    display: block;
-    padding: 10px;
-    font-weight: 400;
-  }
-  
-  .mapboxgl-popup-content div {
-    padding: 10px;
-  }
-  
-  .mapboxgl-container .leaflet-marker-icon {
-    cursor: pointer;
-  }
-  
-  .mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
-    margin-top: 15px;
-  }
+.mapboxgl-popup-content-wrapper {
+  padding: 1%;
+}
 
-  /* CONTROL PANEL */
-  
+.mapboxgl-popup-content h3 {
+  background: #aa7bdc;
+  color: #fff;
+  margin: 0;
+  display: block;
+  padding: 5px;
+  border-radius: 3px 3px 0 0;
+  font-weight: 700;
+  margin-top: -15px;
+  text-align: center;
+}
+
+.mapboxgl-popup-content h4 {
+  margin: 0;
+  display: block;
+  padding: 10px;
+  font-weight: 400;
+}
+
+.mapboxgl-popup-content div {
+  padding: 10px;
+}
+
+.mapboxgl-container .leaflet-marker-icon {
+  cursor: pointer;
+}
+
+.mapboxgl-popup-anchor-top>.mapboxgl-popup-content {
+  margin-top: 15px;
+}
+
+/* CONTROL PANEL */
+
 .mapboxgl-ctrl.mapboxgl-ctrl-attrib {
-    background-color: #0f1f3d !important;
-  }
-  .mapboxgl-ctrl.mapboxgl-ctrl-attrib a {
-    color: #d17d61 !important;
-  }
-  
-  /* Blue + Amber zoom controls */
-  
-  .mapboxgl-ctrl-group {
-    background-color:#0f1f3d !important;
-    color: #d17d61 !important;
-    border: 1px solid #d17d61 !important;
-  }
-  
-  .mapboxgl-ctrl-group > button + button {
-    border-top: 1px solid #d17d61 !important;
-  }
-  
-  /* Takes default icon image URI and swaps the colors in the svg code to Amber */
-  
-  .mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-out {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%270%200%2020%2020%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%0A%20%20%3Cpath%20style%3D%27fill%3A%23d17d61%3B%27%20d%3D%27m%207%2C9%20c%20-0.554%2C0%20-1%2C0.446%20-1%2C1%200%2C0.554%200.446%2C1%201%2C1%20l%206%2C0%20c%200.554%2C0%201%2C-0.446%201%2C-1%200%2C-0.554%20-0.446%2C-1%20-1%2C-1%20z%27%20%2F%3E%0A%3C%2Fsvg%3E%0A") !important;
-  }
-  
-  .mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-in {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%270%200%2020%2020%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%0A%20%20%3Cpath%20style%3D%27fill%3A%23d17d61%3B%27%20d%3D%27M%2010%206%20C%209.446%206%209%206.4459904%209%207%20L%209%209%20L%207%209%20C%206.446%209%206%209.446%206%2010%20C%206%2010.554%206.446%2011%207%2011%20L%209%2011%20L%209%2013%20C%209%2013.55401%209.446%2014%2010%2014%20C%2010.554%2014%2011%2013.55401%2011%2013%20L%2011%2011%20L%2013%2011%20C%2013.554%2011%2014%2010.554%2014%2010%20C%2014%209.446%2013.554%209%2013%209%20L%2011%209%20L%2011%207%20C%2011%206.4459904%2010.554%206%2010%206%20z%27%20%2F%3E%0A%3C%2Fsvg%3E%0A") !important;
-  }
-  
-  .mapboxgl-ctrl-icon.mapboxgl-ctrl-compass > .mapboxgl-ctrl-compass-arrow {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%0A%09%3Cpolygon%20fill%3D%27%23d17d61%27%20points%3D%276%2C9%2010%2C1%2014%2C9%27%2F%3E%0A%09%3Cpolygon%20fill%3D%27%23784a3a%27%20points%3D%276%2C11%2010%2C19%2014%2C11%20%27%2F%3E%0A%3C%2Fsvg%3E") !important;
-  }
+  background-color: #0f1f3d !important;
+}
+
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib a {
+  color: #d17d61 !important;
+}
+
+/* Blue + Amber zoom controls */
+
+.mapboxgl-ctrl-group {
+  background-color: #0f1f3d !important;
+  color: #d17d61 !important;
+  border: 1px solid #d17d61 !important;
+}
+
+.mapboxgl-ctrl-group>button+button {
+  border-top: 1px solid #d17d61 !important;
+}
+
+/* Takes default icon image URI and swaps the colors in the svg code to Amber */
+
+.mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-out {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%270%200%2020%2020%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%0A%20%20%3Cpath%20style%3D%27fill%3A%23d17d61%3B%27%20d%3D%27m%207%2C9%20c%20-0.554%2C0%20-1%2C0.446%20-1%2C1%200%2C0.554%200.446%2C1%201%2C1%20l%206%2C0%20c%200.554%2C0%201%2C-0.446%201%2C-1%200%2C-0.554%20-0.446%2C-1%20-1%2C-1%20z%27%20%2F%3E%0A%3C%2Fsvg%3E%0A") !important;
+}
+
+.mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-in {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%270%200%2020%2020%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%0A%20%20%3Cpath%20style%3D%27fill%3A%23d17d61%3B%27%20d%3D%27M%2010%206%20C%209.446%206%209%206.4459904%209%207%20L%209%209%20L%207%209%20C%206.446%209%206%209.446%206%2010%20C%206%2010.554%206.446%2011%207%2011%20L%209%2011%20L%209%2013%20C%209%2013.55401%209.446%2014%2010%2014%20C%2010.554%2014%2011%2013.55401%2011%2013%20L%2011%2011%20L%2013%2011%20C%2013.554%2011%2014%2010.554%2014%2010%20C%2014%209.446%2013.554%209%2013%209%20L%2011%209%20L%2011%207%20C%2011%206.4459904%2010.554%206%2010%206%20z%27%20%2F%3E%0A%3C%2Fsvg%3E%0A") !important;
+}
+
+.mapboxgl-ctrl-icon.mapboxgl-ctrl-compass>.mapboxgl-ctrl-compass-arrow {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%0A%09%3Cpolygon%20fill%3D%27%23d17d61%27%20points%3D%276%2C9%2010%2C1%2014%2C9%27%2F%3E%0A%09%3Cpolygon%20fill%3D%27%23784a3a%27%20points%3D%276%2C11%2010%2C19%2014%2C11%20%27%2F%3E%0A%3C%2Fsvg%3E") !important;
+}
+
 /* END CONTROL PANEL */
+
+@media screen and (max-width: 767px) {
+  #map {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 30%
+  }
+  #features {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    top: 70%;
+    margin-left: 0;
+  }
+  section {
+    color: black;
+    bottom: 0;
+    top: 70%;
+    margin-left: 0;
+    text-shadow: 0px 0px 0px black;
+  }
+  .legend {
+    bottom: 35%;
+    font: 8px/1px Helvetica, sans-serif;
+  }
+}
