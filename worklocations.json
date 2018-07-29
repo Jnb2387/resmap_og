@@ -52,7 +52,7 @@
         },
         "properties": {
             "place_name": "Frontier Geotek",
-            "details": "<i>GIS Specialist / Database Administrator </i></br> Technology used: PostgreSQL/PostGIS, FME,</br> Alteryx, QGIS, ArcGIS Suite, Oracle, GeoServer, NodeJS</br>GDAL/OGR, PHP, JavaScript, Leaflet",
+            "details": "<i>GIS Specialist / Database Administrator </i></br> Technology used: PostgreSQL/PostGIS, FME,</br> Alteryx, QGIS, ArcGIS Suite, Oracle, GeoServer,</br> NodeJS, GDAL/OGR, PHP, JavaScript, Leaflet",
             "id": 3
         }
     }, {
@@ -63,7 +63,7 @@
         },
         "properties": {
             "place_name": "ReFactorU",
-            "details": "Web Development Bootcamp, studied JavaScript, </br> HTML, CSS, NodeJS, AngularJS, MongDB",
+            "details": "<i>Web Development Bootcamp</i></br> Studied JavaScript, HTML, CSS,</br> NodeJS, AngularJS, MongDB",
             "id": 2
         }
     }, {

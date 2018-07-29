@@ -80,6 +80,7 @@ body {
 }
 #myname {
   text-align: center;
+  font:32px/40px colorado;
 }
 
 .features p {
@@ -211,5 +212,8 @@ section:last-child {
   .legend {
     bottom: 35%;
     font: 8px/1px Helvetica, sans-serif;
+  }
+  #myname {
+    font:25px/40px colorado;
   }
 }
