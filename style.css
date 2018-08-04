@@ -76,7 +76,7 @@ body {
   height: 18px;
   margin: 5px 7px 6px 3px;
   width: 18px;
-  background-color:red;
+  background-color:#9198f8;
 }
 #myname {
   text-align: center;
@@ -193,9 +193,16 @@ section:last-child {
 .mapboxgl-ctrl-icon.mapboxgl-ctrl-compass>.mapboxgl-ctrl-compass-arrow {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%0A%09%3Cpolygon%20fill%3D%27%23d17d61%27%20points%3D%276%2C9%2010%2C1%2014%2C9%27%2F%3E%0A%09%3Cpolygon%20fill%3D%27%23784a3a%27%20points%3D%276%2C11%2010%2C19%2014%2C11%20%27%2F%3E%0A%3C%2Fsvg%3E") !important;
 }
+/* for the 3D control button on the map */
+.controltext{
+  color:#d17d61;
+  font-weight:bold;
+}
 
 /* END CONTROL PANEL */
 
+
+/* FOR MOBILE SCREENS */
 @media screen and (max-width: 767px) {
   #map {
     width: 100%;
@@ -217,3 +224,5 @@ section:last-child {
     font:25px/40px colorado;
   }
 }
+/* END MOBILE */
+

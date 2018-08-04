@@ -10,6 +10,9 @@ var map = new mapboxgl.Map({
     hash: true,
 });
 map.addControl(new mapboxgl.NavigationControl());
+// Use a variable to see if the circle is expanding
+var expanded = true;
+
 var work_location_popup;
 var chapters = {
     'welcome': {
@@ -134,9 +137,10 @@ map.on('load', function () {
                 ]
             },
             'circle-opacity': 0.8,
-            'circle-color': 'red'
+            'circle-color': '#9198f8'
         }
     });
+    
 
     map.addLayer({
         'id': 'Work_locations_labels',
@@ -158,12 +162,52 @@ map.on('load', function () {
             'text-color': 'white',
             'text-halo-color': 'black',
             'text-halo-width': 1.5
-        }
+        },
+
     });
+    map.addLayer({
+        'id': 'Work_locations_labels_highlight',
+        'type': 'symbol',
+        'source': 'Work_locations',
+        "minzoom": 5.79,
+        'layout': {
+            'text-field': '{place_name}',
+            'text-size': 14,
+            "symbol-spacing": 50000,
+            "text-font": ["Ubuntu Mono Bold",
+                "Arial Unicode MS Regular"
+            ],
+            "text-anchor": "top",
+            "text-justify": "center",
+            "text-ignore-placement": true,
+            "text-allow-overlap":true
+
+        },
+        'paint': {
+            'text-color': 'yellow',
+            'text-halo-color': 'black',
+            'text-halo-width': 1.5
+        },
+        "filter": ["in", "id", ""]
+    });
+
+
 
     map.on('click', function (e) {
         var features = map.queryRenderedFeatures(e.point);
         console.log(features);
+    });
+    map.on('click', 'hi-volcanoes_points', function (e) {
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var elevation = e.features[0].properties.elevation;
+        elevation= Math.round(elevation * 3.28);
+        var description= '<h4>'+elevation+"' Above Sea Level</h4>";
+        var elevation_popup = new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+            map.flyTo({center: e.features[0].geometry.coordinates});
+
     });
 
     map.on('click', 'Work_locations_labels', function (e) {
@@ -180,23 +224,44 @@ map.on('load', function () {
           closeButton: false,
           closeOnClick: false
         });
-        
+            //Animates the above layer forever by at a specific interval (500ms) 
+    window.setInterval(function(){
+        // If the circle is expanded, reduce the size and opacity
+        //If the circle is not expanded, increase the size and opacity
+        var size = (expanded)? 5 : 25;
+        var opacity = (expanded)? 1 : 0.5;
+        if (map.getZoom() > 7) {
+        //Change the radius and opacity of the circles
+            map.setPaintProperty('hi-volcanoes_halo', 'circle-radius', size);
+            map.setPaintProperty('hi-volcanoes_halo', 'circle-opacity', opacity);
+            //Toggle the value of expanded
+            expanded = !expanded;
+        }
+    },1600);
+    
+
+    
+ 
 
    
 }); //end map load
 
 
- // map.on('mouseover', 'co-mile-contour', function(e){
-    //     var coordinates = e.lngLat;
-    //     var description="<h4 id=onemilehigh> One Mile High</h4>"
-    //     popup.setLngLat(coordinates)
-    //         .setHTML(description)
-    //         .addTo(map);
-    //     map.getCanvas().style.cursor = 'pointer';
-    //     map.setPaintProperty('co-mile-contour','line-color','blue');
-    // });
-    // map.on('mouseleave', 'co-mile-contour', function(e){
-    //     map.getCanvas().style.cursor = '';
-    //     popup.remove();
-    //     map.setPaintProperty('co-mile-contour','line-color','#9bc149');
-    // });
+ map.on('mouseover', 'Work_locations_labels', function(e){
+     // set bbox as 5px reactangle area around clicked point
+    var feature = e.features[0];
+    var match = feature.properties.id;
+        map.getCanvas().style.cursor = 'pointer';
+        map.setPaintProperty('Work_locations', 'circle-radius', ["match",["get", "id"],match,35,5]);
+        map.setPaintProperty('Work_locations', 'circle-opacity',["match",["get", "id"],match,0.5,1]);
+        map.setFilter('Work_locations_labels_highlight', ['in','id',match]);
+    });
+    map.on('mouseleave', 'Work_locations_labels', function(e){
+        map.getCanvas().style.cursor = '';
+        map.setPaintProperty('Work_locations', 'circle-radius', 5);
+        map.setPaintProperty('Work_locations', 'circle-opacity', 0.5);
+        map.setFilter('Work_locations_labels_highlight', ['in','id',""]);
+
+    });
+
+
