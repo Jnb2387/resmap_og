@@ -9,7 +9,6 @@ var map = new mapboxgl.Map({
     pitch: 0,
     hash: true,
 });
-map.addControl(new mapboxgl.NavigationControl());
 // Use a variable to see if the circle is expanding
 var expanded = true;
 
