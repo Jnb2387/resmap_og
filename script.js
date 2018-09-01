@@ -49,18 +49,15 @@ var chapters = {
         pitch: 0
     },
     'section5': {
-        bearing: 0,
+        bearing: -27,
         center: [-95.62,36.73],
         zoom: 3.33,
-        pitch: 0,
+        pitch: 47,
         speed: 0.6
     },
 };
 
 
-$(".features").on('scroll', onScroll); // for mobile
-$(window).on('scroll', onScroll);
-// On every scroll event, check which element is on screen
 function onScroll() {
     var chapterNames = Object.keys(chapters); // grab all the object keys like welcome or section1
     for (var i = 0; i < chapterNames.length; i++) {
@@ -88,21 +85,37 @@ function setLegend(chapterName)
     var hawaiilegend = $('#hawaiilegend');
     var coloradolegend=$('#coloradolegend');
     var alllegend=$('#alllegend');
+    var stateslegend=$("#stateslegend");
     switch(chapterName) {
         case 'section3':
             hawaiilegend.slideDown('slow');
             coloradolegend.slideUp('slow');
             alllegend.slideUp('slow');
+            stateslegend.slideUp('slow');
+            map.setLayoutProperty('statesbeento', 'visibility', 'none');
             break;
         case 'section4':
             hawaiilegend.slideUp('slow');
             coloradolegend.slideDown('slow');
             alllegend.slideUp('slow');
+            stateslegend.slideUp('slow');
+            map.setLayoutProperty('statesbeento', 'visibility', 'none');
+            break;
+        case 'section5':
+            hawaiilegend.slideUp('slow');
+            coloradolegend.slideUp('slow');
+            alllegend.slideUp('slow');
+            stateslegend.slideDown('slow');
+            map.setLayoutProperty('statesbeento', 'visibility', 'visible');
             break;
         default:
             hawaiilegend.slideUp('slow');
             coloradolegend.slideUp('slow');
             alllegend.slideDown('slow');
+            stateslegend.slideUp('slow'); 
+            map.setLayoutProperty('statesbeento', 'visibility', 'none');
+           
+
     }
 }
 
@@ -117,6 +130,10 @@ function isElementOnScreen(id) {
 
 
 map.on('load', function () {
+
+$(".features").on('scroll', onScroll); // for mobile
+$(window).on('scroll', onScroll);
+// On every scroll event, check which element is on screen
  
     map.addSource('Work_locations',{
         'type': 'geojson',
@@ -189,6 +206,42 @@ map.on('load', function () {
         },
         "filter": ["in", "id", ""]
     });
+    // Get map layers
+    var layers = map.getStyle().layers;
+
+    var labelLayerId;
+    for (var i = 0; i < layers.length; i++) {
+        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) { // find which layers are symbol layers
+            labelLayerId = layers[i].id;
+            break;
+        }
+    }
+
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+
+            // use an 'interpolate' expression to add a smooth transition effect to the
+            // buildings as it zooms in
+            'fill-extrusion-height': [
+                "interpolate", ["linear"], ["zoom"],
+                15, 0,
+                15.05, ["get", "height"]
+            ],
+            'fill-extrusion-base': [
+                "interpolate", ["linear"], ["zoom"],
+                15, 0,
+                15.05, ["get", "min_height"]
+            ],
+            'fill-extrusion-opacity': .6
+        }
+    }, labelLayerId);
 
 
 
@@ -227,7 +280,7 @@ map.on('load', function () {
     window.setInterval(function(){
         // If the circle is expanded, reduce the size and opacity
         //If the circle is not expanded, increase the size and opacity
-        var size = (expanded)? 5 : 25;
+        var size = (expanded)? 0 : 25;
         var opacity = (expanded)? 1 : 0.5;
         if (map.getZoom() > 7) {
         //Change the radius and opacity of the circles
